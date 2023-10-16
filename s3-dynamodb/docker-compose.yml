@@ -3,6 +3,7 @@ version: '3.3'
 services:
   localstack:
     image: localstack/localstack:1.4
+    platform: linux/amd64
     environment:
       - AWS_ACCESS_KEY_ID=dummy
       - AWS_SECRET_ACCESS_KEY=dummy
