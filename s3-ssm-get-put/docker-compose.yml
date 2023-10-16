@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  localstack:
+    image: localstack/localstack:1.4
+    platform: linux/amd64
+    environment:
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+      - DEFAULT_REGION=east-us-1
+      - SERVICES=s3,ssm
+    ports:
+      - "4566-4569:4566-4569"
+    volumes:
+      - ./aws:/etc/localstack/init/ready.d
+    healthcheck:
+      test: curl -s localhost:4566 | grep running > /dev/null || exit 1
+      interval: 5s
+      timeout: 3s
